@@ -15,6 +15,7 @@ function render() {
   const sh = e.safeHarborQuarterly !== null
     ? `<p>Safe harbor: pay <span class="big">${$(e.safeHarborQuarterly)}</span> per quarter (${e.safeHarborPct}% of last year's tax${e.withholding ? ', minus withholding' : ''}). Paying this on time avoids the IRS underpayment penalty even if you earn more this year.</p>`
     : `<p>Enter last year's total tax and AGI to see your penalty-proof <b>safe harbor</b> amount.</p>`;
+  window.__tq = { e, w2: +f.w2Wages.value || 0, other: +f.otherIncome.value || 0 }; document.dispatchEvent(new CustomEvent('tq:estimate'));
   out.innerHTML = `<h2>Your 2026 estimate</h2>${sh}
   <p>Based on this year's projected income: <b>${$(e.currentQuarterly)}</b> per quarter (${$(e.owedViaEstimates)} for the year).</p>
   <p>Set aside about <span class="big">${e.setAsidePct.toFixed(1)}%</span> of every freelance payment you receive.</p>

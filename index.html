@@ -36,12 +36,31 @@
 <section id="out" aria-live="polite"></section></div>
 <section class="pro" id="pricing"><h2>Pricing (USD)</h2>
  <div class="plans"><div class="plan"><h3>Free — $0</h3><ul><li>Federal income + self-employment tax estimate</li><li>Set-aside percentage</li><li>Safe-harbor amount from last year's return</li><li>Quarterly payment amounts &amp; IRS due dates</li><li>Runs entirely in your browser, no account</li></ul></div>
- <div class="plan featured"><h3>Pro — $6/month or $49/year <span class="soon">coming soon</span></h3><ul><li>Everything in Free</li><li>Saved history of every payment &amp; deposit</li><li>Email reminders before each IRS deadline</li><li>State estimated-tax calculations</li><li>PDF summary for you or your accountant</li></ul>
+ <div class="plan featured"><h3>Pro — $6/month or $49/year</h3><ul><li>Everything in Free</li><li>Saved history of every payment &amp; deposit</li><li>Calendar reminders (.ics) 7 days and 1 day before each IRS deadline</li><li>State estimated-tax calculations</li><li>PDF summary for you or your accountant</li></ul>
  <p class="fine">Pro is a subscription that renews automatically each month or year until cancelled. Prices in US dollars; sales tax/VAT may be added at checkout. 30-day money-back guarantee (<a href="refund.html">Refund Policy</a>).</p>
- <button disabled aria-disabled="true">Pro — not available yet (checkout coming soon)</button></div></div></section>
-<section class="sources"><h2>Figures used</h2><p>2026 brackets, standard deduction &amp; QBI thresholds: <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf">IRS Rev. Proc. 2025-32</a>. Social Security wage base $184,500: <a href="https://www.ssa.gov/news/en/cola/factsheets/2026.html">SSA</a>. Safe harbor &amp; due dates: <a href="https://www.irs.gov/pub/irs-pdf/f1040es.pdf">IRS Form 1040-ES</a>. Federal only; state taxes not included.</p></section>
+ <div class="buy"><button class="buy-btn" data-plan="monthly" disabled>Get Pro — $6/month</button><button class="buy-btn alt" data-plan="yearly" disabled>Get Pro — $49/year</button></div>
+ <p class="fine" id="buy-status">Checkout is not enabled yet.</p></div></div></section>
+<section class="card pro-app" id="pro"><h2 class="section-title" style="margin-top:0">Pro tools <span class="badge" id="pro-badge">Locked</span></h2>
+ <p class="fine" id="pro-lock-msg">Pro tools unlock after purchase. Previews are shown, actions are disabled until then.</p>
+ <div class="pro-grid">
+  <div class="tool"><h3><img src="assets/i-chart.svg" alt=""> State estimated tax</h3>
+   <label>Your state <select id="state-sel"></select></label><div id="state-out" class="tool-out"></div></div>
+  <div class="tool"><h3><img src="assets/i-calendar.svg" alt=""> Calendar reminders</h3>
+   <p>Download the four 2026 Form 1040-ES due dates (Apr 15, Jun 15, Sep 15 2026 and Jan 15 2027) with alerts 7 days and 1 day before. Works with Google Calendar, Apple Calendar and Outlook.</p>
+   <button id="ics-btn" class="pro-only">Download calendar (.ics)</button></div>
+  <div class="tool wide"><h3><img src="assets/i-coins.svg" alt=""> Payment &amp; deposit history</h3>
+   <form id="hist-form" class="hist-form"><input type="date" name="date" required aria-label="Date"><input type="number" name="amount" min="0" step="0.01" placeholder="Amount $" required aria-label="Amount"><select name="kind" aria-label="Type"><option value="federal">Federal payment</option><option value="state">State payment</option><option value="deposit">Set-aside deposit</option></select><input name="note" placeholder="Note (optional)" aria-label="Note"><button class="pro-only">Add</button></form>
+   <div id="hist-out" class="tool-out"></div>
+   <div class="row"><button id="exp-btn" class="pro-only ghost">Export backup (JSON)</button><button id="imp-btn" class="pro-only ghost">Import backup</button><input type="file" id="imp-file" accept="application/json,.json" hidden></div>
+   <p class="fine">Saved only in this browser (localStorage). Export a backup to move it to another device.</p></div>
+  <div class="tool"><h3><img src="assets/i-shield.svg" alt=""> PDF summary</h3><p>Save a clean summary of your estimate, state tax and payment history for you or your accountant (choose "Save as PDF" in the print dialog).</p><button id="pdf-btn" class="pro-only">Save PDF summary</button></div>
+  <div class="tool"><h3>Restore purchase</h3><form id="restore-form"><input type="email" name="email" placeholder="Checkout email" required aria-label="Email"><input name="txn" placeholder="Transaction ID (txn_…)" required aria-label="Transaction ID"><button class="ghost">Restore Pro on this device</button></form><p class="fine" id="restore-msg">Find the transaction ID in your Paddle receipt email. Until server-side verification launches, restore is checked on this device only.</p></div>
+ </div></section>
+
+<section class="sources"><h2>Figures used</h2><p>2026 brackets, standard deduction &amp; QBI thresholds: <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf">IRS Rev. Proc. 2025-32</a>. Social Security wage base $184,500: <a href="https://www.ssa.gov/news/en/cola/factsheets/2026.html">SSA</a>. Safe harbor &amp; due dates: <a href="https://www.irs.gov/pub/irs-pdf/f1040es.pdf">IRS Form 1040-ES</a>. Federal figures above; Pro state estimates use each state's latest published schedule (year shown): <span id="state-sources"></span></p></section>
+<section id="print-summary" aria-hidden="true"></section>
 </main></div>
 <footer><div class="wrap"><a class="brand" href="index.html"><img src="assets/logo.svg" alt="" width="32" height="32"><span>Tax<b>Quarterly</b></span></a><div class="disclaimer">Estimates only, not tax advice.</div><p>Built by Wesley Lopes, economista.</p>
 <p class="links"><a href="guides/">Guides</a> · <a href="terms.html">Terms of Service</a> · <a href="refund.html">Refund Policy</a> · <a href="privacy.html">Privacy Policy</a></p>
 <p>Support: weslopes@gmail.com · +55 62 99922-0240. Seller: Wesley Lopes de Souza. Orders processed by Paddle.com, Merchant of Record.</p></div></footer>
-<script type="module" src="src/ui.js"></script></body></html>
+<script type="module" src="src/ui.js"></script><script type="module" src="src/pro.js"></script></body></html>
